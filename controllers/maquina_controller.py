@@ -15,3 +15,12 @@ def adicionar_maquina_preventiva(nome):
 
 def remover_maquina_preventiva(id):
     delete_maquina_por_id(id)
+
+def listar_maquinas_corretiva():
+    return get_maquinas_por_tipo("Corretiva")
+
+def adicionar_maquina_corretiva(nome):
+    create_maquina_tipo(nome, "Corretiva")
+
+def remover_maquina_corretiva(id):
+    delete_maquina_por_id(id)

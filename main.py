@@ -3,7 +3,7 @@ from views.menu_view import menu_view
 from views.maquinas_view import maquinas_view
 from views.manutencoes_view import manutencoes_view
 from views.manutencao_preventiva_view import manutencao_preventiva_view
-# (futuramente outras views como corretiva e preditiva)
+from views.manutencao_corretiva_view import manutencao_corretiva_view
 
 def main(page: ft.Page):
     page.title = "Sistema de Manutenção"
@@ -21,7 +21,8 @@ def main(page: ft.Page):
             manutencoes_view(page)
         elif page.route == "/manutencao_preventiva":
             manutencao_preventiva_view(page)
-        # outras rotas no futuro
+        elif page.route == "/manutencao_corretiva":
+            manutencao_corretiva_view(page)
 
         page.update()
 
