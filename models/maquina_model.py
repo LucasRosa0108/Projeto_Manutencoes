@@ -1,5 +1,30 @@
 from database.connection import conectar
 
+def get_maquinas():
+    conn = conectar()
+    cursor = conn.cursor()
+    cursor.execute("SELECT id, nome, tipo, funcionando, status FROM maquinas")
+    dados = cursor.fetchall()
+    conn.close()
+    return dados
+
+def create_maquina(nome, tipo, funcionando):
+    conn = conectar()
+    cursor = conn.cursor()
+    cursor.execute(
+        "INSERT INTO maquinas (nome, tipo, funcionando) VALUES (?, ?, ?)",
+        (nome, tipo, funcionando)
+    )
+    conn.commit()
+    conn.close()
+
+def delete_maquina(id_maquina):
+    conn = conectar()
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM maquinas WHERE id = ?", (id_maquina,))
+    conn.commit()
+    conn.close()
+
 def get_maquinas_por_tipo(tipo):
     conn = conectar()
     cursor = conn.cursor()
