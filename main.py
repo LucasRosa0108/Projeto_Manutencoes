@@ -4,6 +4,7 @@ from views.maquinas_view import maquinas_view
 from views.manutencoes_view import manutencoes_view
 from views.manutencao_preventiva_view import manutencao_preventiva_view
 from views.manutencao_corretiva_view import manutencao_corretiva_view
+from views.manutencao_preditiva_view import manutencao_preditiva_view
 
 def main(page: ft.Page):
     page.title = "Sistema de Manutenção"
@@ -23,6 +24,8 @@ def main(page: ft.Page):
             manutencao_preventiva_view(page)
         elif page.route == "/manutencao_corretiva":
             manutencao_corretiva_view(page)
+        elif page.route == "/manutencao_preditiva":
+            manutencao_preditiva_view(page)
 
         page.update()
 

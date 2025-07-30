@@ -21,3 +21,25 @@ def delete_maquina_por_id(id_maquina):
     cursor.execute("DELETE FROM maquinas WHERE id = ?", (id_maquina,))
     conn.commit()
     conn.close()
+
+def get_maquinas_preditiva():
+    conn = conectar()
+    cursor = conn.cursor()
+    cursor.execute("SELECT id, nome, tipo, funcionando, status FROM maquinas WHERE tipo = 'Preditiva'")
+    dados = cursor.fetchall()
+    conn.close()
+    return dados
+
+def create_maquina_preditiva(nome, status):
+    conn = conectar()
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO maquinas (nome, tipo, funcionando, status) VALUES (?, 'Preditiva', 1, ?)", (nome, status))
+    conn.commit()
+    conn.close()
+
+def update_status_maquina(id_maquina, status):
+    conn = conectar()
+    cursor = conn.cursor()
+    cursor.execute("UPDATE maquinas SET status = ? WHERE id = ?", (status, id_maquina))
+    conn.commit()
+    conn.close()

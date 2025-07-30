@@ -20,3 +20,18 @@ def criar_tabelas():
     ''')
     con.commit()
     con.close()
+
+def criar_tabelas():
+    con = conectar()
+    cur = con.cursor()
+    cur.execute('''
+        CREATE TABLE IF NOT EXISTS maquinas (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nome TEXT NOT NULL,
+            tipo TEXT,
+            funcionando INTEGER DEFAULT 1,
+            status TEXT DEFAULT 'Verde'
+        )
+    ''')
+    con.commit()
+    con.close()
