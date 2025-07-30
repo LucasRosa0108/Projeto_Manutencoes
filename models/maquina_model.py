@@ -1,18 +1,23 @@
-from database.db import conectar
+from database.connection import conectar
 
-def listar_maquinas():
+def get_maquinas_por_tipo(tipo):
     conn = conectar()
     cursor = conn.cursor()
-    cursor.execute("""
-        SELECT m.id, m.nome, m.status_funcionamento, m.usa_preditiva,
-        CASE WHEN p.id IS NOT NULL THEN 'Preventiva' ELSE '' END as preventiva,
-        CASE WHEN c.id IS NOT NULL THEN 'Corretiva' ELSE '' END as corretiva,
-        pr.status_cor
-        FROM maquinas m
-        LEFT JOIN manutencao_preventiva p ON m.id = p.maquina_id
-        LEFT JOIN manutencao_corretiva c ON m.id = c.maquina_id
-        LEFT JOIN manutencao_preditiva pr ON m.id = pr.maquina_id
-    """)
+    cursor.execute("SELECT * FROM maquinas WHERE tipo = ?", (tipo,))
     dados = cursor.fetchall()
     conn.close()
     return dados
+
+def create_maquina_tipo(nome, tipo):
+    conn = conectar()
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO maquinas (nome, tipo, funcionando) VALUES (?, ?, 1)", (nome, tipo))
+    conn.commit()
+    conn.close()
+
+def delete_maquina_por_id(id_maquina):
+    conn = conectar()
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM maquinas WHERE id = ?", (id_maquina,))
+    conn.commit()
+    conn.close()
